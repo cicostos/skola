@@ -1,12 +1,8 @@
 drop database if exists HKUD;
-create database HKUD character set utf8;
+create database HKUD --default_character_set=utf8;
 use HKUD;
 
 
-create table radnaGodina(
-sifra int not null primary key auto_increment,
-godina char(4) not null
-);
 
 create table dogadjaji(
 sifra int not null key auto_increment,
@@ -14,29 +10,7 @@ opisDogadjaja varchar(50) not null,
 godina int not null
 );
 
-create table clan(
-sifra int not null key auto_increment,
-uloga varchar(15) not null,
-osoba int not null,
-uplaceno int not null,
-datumUclanjenja date not null,
-godina int not null
-);
 
-create table clanarina(
-sifra int not null primary key auto_increment,
-iznosClanarine int(3) not null,
-iznosDonacije int(8) not null,
-datumUplateDon date not null,
-mjesec varchar(10) not null,
-godina int not null
-);
-
-create table uplaceno(
-clanarina int not null,
-donacija int(8) not null,
-clan int not null
-);
 
 create table osoba(
 sifra int not null primary key auto_increment,
@@ -68,30 +42,12 @@ naziv varchar(20) not null,
 pranjeNosnje date not null
 );
 
-create table sudjelovali(
-dogadjaji int not null,
-osoba int not null
-);
-
-
-create table operater(
-sifra int not null primary key auto_increment,
-ime varchar(50) not null,
-prezime varchar(50) not null,
-korisnik varchar(50) not null,
-lozinka char(32) not null
-);
-
-create unique index i1 on operater(korisnik);
 
 alter table dogadjaji add foreign key (godina) references radnaGodina(sifra);
 
 alter table koreo_nosnje add foreign key (dogadjaji) references dogadjaji(sifra);
 alter table koreo_nosnje add foreign key (koreografije) references koreografije(sifra);
 alter table koreo_nosnje add foreign key (nosnje) references nosnje(sifra);
-
-alter table sudjelovali add foreign key (osoba)references osoba(sifra);
-alter table sudjelovali add foreign key (dogadjaji) references dogadjaji(sifra);
 
 alter table uplaceno add foreign key (clanarina) references clanarina(sifra);
 
@@ -100,25 +56,14 @@ alter table clan add foreign key (osoba) references osoba(sifra);
 alter table clan add foreign key (godina) references radnaGodina(sifra);
 
 
-
-####MOŽDA PROĐE ali bolje je napisati datum ovako
-insert into osoba (ime,prezime,tvrtka,oib,datumRodjenja,adresa,brojTelefona,email)
-values ('damir','škrebljin','HŽ','12345678901','1976-10-02','osijek 23','1233456777','netko@nesto.hr');
-
 insert into clanarina (mjesec,iznosClanarine,iznosDonacije,datumUplateDon)
 values ('sijecanj',50,10000,'2016-11-01');
 
 insert into uplaceno (clanarina,donacija,clan)
 values (1,1,'1233456777');
 
-insert into radnaGodina (godina)
-values ('2015');
-
 insert into dogadjaji (opisDogadjaja,godina)
 values('nastup',1);
-
-insert into sudjelovali (osoba,dogadjaji)
-values (1,1); 
 
 
 insert into koreografije (koreografija)
@@ -134,7 +79,7 @@ values (1,1,1);
 insert into clan (uloga,osoba,uplaceno,datumUclanjenja,godina)
 values ('plesac',1,1,'1993-16-02',1);
 
-insert into operater (ime,prezime,korisnik,lozinka)
-values ('damir','skrebljin','dskrebljin',md5('d'));
+#insert into operater (ime,prezime,korisnik,lozinka)
+#values ('damir','skrebljin','dskrebljin',md5('d'));
 
 
