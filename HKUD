@@ -21,14 +21,14 @@ brojTelefona varchar(15) not null,
 email varchar(25) not null
 );
 
-create table koreografije(
+create table koreografija(
 sifra int not null key auto_increment,
-koreografije varchar(20)not null
+koreografija varchar(20)not null
 );
 
 create table koreo_nosnje(
 osoba int not null,
-koreografije int not null,
+koreografija int not null,
 nosnje int not null,
 dogadjaji int not null
 );
