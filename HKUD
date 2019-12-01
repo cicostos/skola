@@ -14,7 +14,6 @@ sifra int not null primary key auto_increment,
 oib char(11) not null,
 ime varchar(10) not null,
 prezime varchar(20) not null,
-tvrtka varchar(25) not null,
 datumRodjenja date not null,
 adresa varchar(25) not null,
 brojTelefona varchar(15) not null,
@@ -26,7 +25,7 @@ sifra int not null key auto_increment,
 koreografija varchar(20)not null
 );
 
-create table koreo_nosnje(
+create table koreo_nosnja(
 osoba int not null,
 koreografija int not null,
 nosnje int not null,
@@ -34,7 +33,7 @@ dogadjaji int not null
 );
 
 
-create table nosnje(
+create table nosnja(
 sifra int not null key auto_increment,
 naziv varchar(20) not null,
 pranjeNosnje date not null
@@ -43,8 +42,8 @@ pranjeNosnje date not null
 
 
 alter table koreo_nosnje add foreign key (dogadjaji) references dogadjaji(sifra);
-alter table koreo_nosnje add foreign key (koreografije) references koreografije(sifra);
-alter table koreo_nosnje add foreign key (nosnje) references nosnje(sifra);
+alter table koreo_nosnje add foreign key (koreografija) references koreografija(sifra);
+alter table koreo_nosnje add foreign key (nosnja) references nosnja(sifra);
 alter table koreo_nosnje add foreign key (osoba) references osoba(sifra);
 
 
