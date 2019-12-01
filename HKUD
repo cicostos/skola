@@ -6,11 +6,8 @@ use HKUD;
 
 create table dogadjaji(
 sifra int not null key auto_increment,
-opisDogadjaja varchar(50) not null,
-godina int not null
+opisDogadjaja varchar(50) not null
 );
-
-
 
 create table osoba(
 sifra int not null primary key auto_increment,
@@ -26,10 +23,11 @@ email varchar(25) not null
 
 create table koreografije(
 sifra int not null key auto_increment,
-koreografija varchar(20)not null
+koreografije varchar(20)not null
 );
 
 create table koreo_nosnje(
+osoba int not null,
 koreografije int not null,
 nosnje int not null,
 dogadjaji int not null
@@ -43,24 +41,13 @@ pranjeNosnje date not null
 );
 
 
-alter table dogadjaji add foreign key (godina) references radnaGodina(sifra);
 
 alter table koreo_nosnje add foreign key (dogadjaji) references dogadjaji(sifra);
 alter table koreo_nosnje add foreign key (koreografije) references koreografije(sifra);
 alter table koreo_nosnje add foreign key (nosnje) references nosnje(sifra);
-
-alter table uplaceno add foreign key (clanarina) references clanarina(sifra);
-
-alter table clan add foreign key (uplaceno) references uplaceno(clanarina);
-alter table clan add foreign key (osoba) references osoba(sifra);
-alter table clan add foreign key (godina) references radnaGodina(sifra);
+alter table koreo_nosnje add foreign key (osoba) references osoba(sifra);
 
 
-insert into clanarina (mjesec,iznosClanarine,iznosDonacije,datumUplateDon)
-values ('sijecanj',50,10000,'2016-11-01');
-
-insert into uplaceno (clanarina,donacija,clan)
-values (1,1,'1233456777');
 
 insert into dogadjaji (opisDogadjaja,godina)
 values('nastup',1);
@@ -76,8 +63,8 @@ insert into koreo_nosnje (koreografije,nosnje,dogadjaji)
 values (1,1,1);
 
 ###### OVDJE MORAŠ UNIJETI sve not null atribute!
-insert into clan (uloga,osoba,uplaceno,datumUclanjenja,godina)
-values ('plesac',1,1,'1993-16-02',1);
+#insert into clan (uloga,osoba,uplaceno,datumUclanjenja,godina)
+#values ('plesac',1,1,'1993-16-02',1);
 
 #insert into operater (ime,prezime,korisnik,lozinka)
 #values ('damir','skrebljin','dskrebljin',md5('d'));
